@@ -224,7 +224,7 @@ class RestoreWorker(object):
             if not os.path.exists(path):
                 os.makedirs(path)
             command = '%(sstableloader)s --nodes %(hosts)s -v \
-                %(keyspace_path)s/%(table)s' % dict(sstableloader=sstableloader, hosts=','.join(target_hosts),
+                .%(keyspace_path)s/%(table)s' % dict(sstableloader=sstableloader, hosts=','.join(target_hosts),
                                                     keyspace_path=keyspace_path, table=table)
 
             logging.info("invoking: {!s}".format(command))
