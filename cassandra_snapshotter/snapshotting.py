@@ -189,7 +189,8 @@ class RestoreWorker(object):
 
     def _download_key(self, key):
         r = self.keyspace_table_matcher.search(key.name)
-        filename = "./{!s}/{!s}/{!s}_{!s}".format(
+        keyspace_path = "/".join([self.cassandra_data_dir, "data"])
+        filename = "." + keyspace_path + "/{!s}/{!s}/{!s}_{!s}".format(
             r.group(2), r.group(3),
             key.name.split('/')[2], key.name.split('/')[-1])
 
@@ -225,6 +226,7 @@ class RestoreWorker(object):
             command = '%(sstableloader)s --nodes %(hosts)s -v \
                 %(keyspace_path)s/%(table)s' % dict(sstableloader=sstableloader, hosts=','.join(target_hosts),
                                                     keyspace_path=keyspace_path, table=table)
+
             logging.info("invoking: {!s}".format(command))
             os.system(command)
 

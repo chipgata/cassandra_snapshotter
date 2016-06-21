@@ -103,6 +103,7 @@ def list_backups(args):
 
 
 def restore_backup(args):
+
     snapshots = SnapshotCollection(
         args.aws_access_key_id,
         args.aws_secret_access_key,
@@ -277,6 +278,7 @@ def main():
     if args.verbose:
         logging.basicConfig(level=logging.INFO)
 
+    print(args)
     if subcommand == 'backup':
         run_backup(args)
     elif subcommand == 'list':
